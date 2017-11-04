@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<f:loadBundle basename="ro.tirzuman.ioana.i18n.Messages" var="msgs"/>
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>#{msgs['assignments.title']}</h1>
+
+	<p:dataTable id="studentList" var="a" value="#{assignments.list}">
+		<p:column headerText="Name">
+			<h:outputText value="#{a.name}" />
+		</p:column>
+
+		<p:column headerText="Allocated project">
+			<h:outputText value="#{a.allocatedProject}" />
+		</p:column>
+
+		<p:column headerText="Preferred project">
+			<h:outputText value="#{a.preferredProject}" />
+		</p:column>
+
+	</p:dataTable>
+
+</h:body>
+</html>

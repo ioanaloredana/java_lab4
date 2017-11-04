@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<f:loadBundle basename="ro.tirzuman.ioana.i18n.Messages" var="msgs"/>
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>#{msgs['projects.title']}</h1>
+
+	<h:form>
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<p:outputLabel for="projectName" value="Project name: " />
+			<h:inputText id="projectName" value="#{project.name}" />
+
+			<h:outputLabel for="quota" value="Max students: " />
+			<p:spinner id="quota" value="#{project.quota}" />
+
+			<p:outputLabel for="skills" value="Skills required: " />
+			<p:chips id="skills" value="#{project.skills}" />
+		</h:panelGrid>
+		<p:commandButton "Add Project" action="#{projects.addProject(project)}" update="projectList"/>
+	</h:form>
+	<br />
+
+
+	<p:outputLabel for="projectList" value="Existing projects: " />
+	<br />
+	<p:dataTable id="projectList" var="p" value="#{projects.list}">
+		<p:column headerText="Name">
+			<h:outputText value="#{p.name}" />
+		</p:column>
+
+		<p:column headerText="Quota">
+			<h:outputText value="#{p.quota}" />
+		</p:column>
+
+		<p:column headerText="Skills">
+			<p:dataList value="#{p.skills}" var="skill" type="ordered">
+		        #{skill}
+		    </p:dataList>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>

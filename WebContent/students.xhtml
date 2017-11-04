@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<f:loadBundle basename="ro.tirzuman.ioana.i18n.Messages" var="msgs" />
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>#{msgs['students.title']}</h1>
+
+	<h:form>
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<p:outputLabel for="studentName" value="Student name: " />
+			<h:inputText id="studentName" value="#{student.name}" />
+
+			<p:outputLabel for="skills" value="Skills:" />
+			<p:selectManyCheckbox id="skills" value="#{student.skills}" layout="grid" columns="3">
+				<f:selectItems value="#{skills.skillsList}" var="skill" itemLabel="#{skill}" itemValue="#{skill}" />
+			</p:selectManyCheckbox>
+
+			<p:outputLabel for="project" value="Preferred project:" />
+			<p:selectOneRadio id="project" value="#{student.preferredProject}" layout="grid" columns="3">
+				<f:selectItems value="#{projects.list}" var="project" itemLabel="#{project.name}" itemValue="#{project.name}" />
+			</p:selectOneRadio>
+		</h:panelGrid>
+		<p:commandButton value="Add student" action="#{students.addStudent(student)}" update="studentList"/>
+	</h:form>
+	<br />
+
+
+	<p:outputLabel for="studentList" value="Existing students: " />
+	<br />
+	<p:dataTable id="studentList" var="s" value="#{students.list}">
+		<p:column headerText="Name">
+			<h:outputText value="#{s.name}" />
+		</p:column>
+
+		<p:column headerText="Allocated project">
+			<h:outputText value="#{s.allocatedProject}" />
+		</p:column>
+
+		<p:column headerText="Preferred project">
+			<h:outputText value="#{s.preferredProject}" />
+		</p:column>
+
+		<p:column headerText="Skills">
+			<p:dataList value="#{s.skills}" var="skill" type="ordered">
+		        #{skill}
+		    </p:dataList>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>
