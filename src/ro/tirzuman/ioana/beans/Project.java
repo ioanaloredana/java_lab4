@@ -28,6 +28,9 @@ public class Project {
 	}
 
 	public List<String> getSkills() {
+		if (skills == null) {
+			skills = new ArrayList<String>();
+		}
 		return skills;
 	}
 

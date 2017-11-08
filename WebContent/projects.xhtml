@@ -21,7 +21,7 @@
 			<p:outputLabel for="skills" value="Skills required: " />
 			<p:chips id="skills" value="#{project.skills}" />
 		</h:panelGrid>
-		<p:commandButton "Add Project" action="#{projects.addProject(project)}" update="projectList"/>
+		<p:commandButton value="Add Project" action="#{projects.addProject(project)}" update="projectList"/>
 	</h:form>
 	<br />
 

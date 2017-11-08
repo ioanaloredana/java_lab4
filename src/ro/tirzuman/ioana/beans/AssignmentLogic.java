@@ -29,16 +29,18 @@ public class AssignmentLogic {
 
 	private synchronized List<Student> computeAssignments() {
 		resetAllocatedProjects();
-		for (Project p : projects.getList()) {
+		List<Student> studentsList = students.getList();
+		List<Project> projectsList = projects.getList();
+		for (Project p : projectsList) {
 			for (int i = 0; i < p.getQuota(); i++) {
-				for (Student s : students.getList()) {
+				for (Student s : studentsList) {
 					if (s.getAllocatedProject() == null && isMatch(p, s)) {
 						s.setAllocatedProject(p.getName());
 					}
 				}
 			}
 		}
-		return students.getList();
+		return studentsList;
 	}
 
 	private boolean isMatch(Project p, Student s) {
