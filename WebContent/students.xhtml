@@ -5,52 +5,59 @@
 
 <f:loadBundle basename="ro.tirzuman.ioana.i18n.Messages" var="msgs" />
 
-<h:head>
-</h:head>
 <h:body>
-	<h1>#{msgs['students.title']}</h1>
+	<ui:composition template="page.xhtml">
+		<ui:define name="header">
+			<ui:param name="pageTitle" value="#{msgs['students.title']}" />
+		</ui:define>
 
-	<h:form>
-		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-			<p:outputLabel for="studentName" value="Student name: " />
-			<h:inputText id="studentName" value="#{student.name}" />
+		<ui:define name="content">
+			<h:form>
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="studentName" value="Student name: " />
+					<h:inputText id="studentName" value="#{student.name}" />
 
-			<p:outputLabel for="skills" value="Skills:" />
-			<p:selectManyCheckbox id="skills" value="#{student.skills}" layout="grid" columns="3">
-				<f:selectItems value="#{skills.skillsList}" var="skill" itemLabel="#{skill}" itemValue="#{skill}" />
-			</p:selectManyCheckbox>
+					<p:outputLabel for="skills" value="Skills:" />
+					<p:selectManyCheckbox id="skills" value="#{student.skills}" layout="grid" columns="3">
+						<f:selectItems value="#{skills.skillsList}" var="skill" itemLabel="#{skill}" itemValue="#{skill}" />
+					</p:selectManyCheckbox>
 
-			<p:outputLabel for="project" value="Preferred project:" />
-			<p:selectOneRadio id="project" value="#{student.preferredProject}" layout="grid" columns="3">
-				<f:selectItems value="#{projects.list}" var="project" itemLabel="#{project.name}" itemValue="#{project.name}" />
-			</p:selectOneRadio>
-		</h:panelGrid>
-		<p:commandButton value="Add student" action="#{students.addStudent(student)}" update="studentList"/>
-	</h:form>
-	<br />
+					<p:outputLabel for="project" value="Preferred project:" />
+					<p:selectOneRadio id="project" value="#{student.preferredProject}" layout="grid" columns="3">
+						<f:selectItems value="#{projects.list}" var="project" itemLabel="#{project.name}" itemValue="#{project.name}" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+				<p:commandButton value="Add student" action="#{students.addStudent(student)}" update="studentList" />
+			</h:form>
+			<br />
 
 
-	<p:outputLabel for="studentList" value="Existing students: " />
-	<br />
-	<p:dataTable id="studentList" var="s" value="#{students.list}">
-		<p:column headerText="Name">
-			<h:outputText value="#{s.name}" />
-		</p:column>
+			<p:outputLabel for="studentList" value="Existing students: " />
+			<br />
+			<ui:composition template="dataView.xhtml">
+				<ui:define name="dataViewContent">
+					<p:dataTable id="studentList" var="s" value="#{students.list}">
+						<p:column headerText="Name">
+							<h:outputText value="#{s.name}" />
+						</p:column>
 
-		<p:column headerText="Allocated project">
-			<h:outputText value="#{s.allocatedProject}" />
-		</p:column>
+						<p:column headerText="Allocated project">
+							<h:outputText value="#{s.allocatedProject}" />
+						</p:column>
 
-		<p:column headerText="Preferred project">
-			<h:outputText value="#{s.preferredProject}" />
-		</p:column>
+						<p:column headerText="Preferred project">
+							<h:outputText value="#{s.preferredProject}" />
+						</p:column>
 
-		<p:column headerText="Skills">
-			<p:dataList value="#{s.skills}" var="skill" type="ordered">
-		        #{skill}
-		    </p:dataList>
-		</p:column>
-	</p:dataTable>
-
+						<p:column headerText="Skills">
+							<p:dataList value="#{s.skills}" var="skill" type="ordered">
+						        #{skill}
+						    </p:dataList>
+						</p:column>
+					</p:dataTable>
+				</ui:define>
+			</ui:composition>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
